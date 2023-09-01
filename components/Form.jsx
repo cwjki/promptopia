@@ -20,7 +20,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
             Your IA prompt
           </span>
           <textarea
-          className="form_textarea"
+            className="form_textarea"
             value={post.prompt}
             onChange={(e) =>
               setPost({
@@ -29,6 +29,26 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
               })
             }
             placeholder="Write your prompt here..."
+            required
+          />
+        </label>
+        <label>
+          <span className="font-satoshi font-semibold text-base text-gray-700">
+            Tag {` `}
+            <span className="font-normal">
+              (#product, #webdevelopment, #idea)
+            </span>
+          </span>
+          <input
+            className="form_input"
+            value={post.tag}
+            onChange={(e) =>
+              setPost({
+                ...post,
+                tag: e.target.value,
+              })
+            }
+            placeholder="#tag"
             required
           />
         </label>
