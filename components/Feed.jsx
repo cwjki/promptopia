@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import PromptCard from "./PromptCard";
 
 const PromptCardList = ({ data, handleTagClick }) => {
+  console.log(data);
   return (
     <div className="mt-16 prompt_layout">
       {data.map((post) => (
@@ -25,7 +26,7 @@ const Feed = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await fetch("/api/prompt");
+      const response = await fetch("/api/prompts");
       const data = await response.json();
       setPosts(data);
     };
@@ -46,7 +47,7 @@ const Feed = () => {
         />
       </form>
 
-      <PromptCardList data={[posts]} handleTagClick={() => {}} />
+      <PromptCardList data={posts} handleTagClick={() => {}} />
     </section>
   );
 };
