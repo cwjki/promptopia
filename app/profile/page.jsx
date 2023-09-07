@@ -22,14 +22,14 @@ const MyProfile = () => {
     if (session?.user.id) {
       fetchPosts();
     }
-  }, []);
+  }, [session]);
 
 
   return (
     <Profile
       name="My"
       desc="Welcome to your personalized profile page"
-      data={[posts]}
+      data={posts}
       handleEdit={handleEdit}
       handleDelete={handleDelete}
     />
