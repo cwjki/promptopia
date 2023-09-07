@@ -24,6 +24,7 @@ const MyProfile = () => {
     }
   }, []);
 
+
   return (
     <Profile
       name="My"
@@ -32,6 +33,7 @@ const MyProfile = () => {
       handleEdit={handleEdit}
       handleDelete={handleDelete}
     />
+    
   );
 };
 
