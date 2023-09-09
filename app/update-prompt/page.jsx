@@ -2,13 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useSession } from "next-auth/react";
 
 import Form from "@components/Form";
 
 const EditPrompt = () => {
   const router = useRouter();
-  const { data: session } = useSession();
   const searchParams = useSearchParams();
   const promptId = searchParams.get("id");
 
@@ -31,18 +29,17 @@ const EditPrompt = () => {
     if (promptId) getPromptDetails();
   }, [promptId]);
 
-  const createPost = async (e) => {
+  const updatePost = async (e) => {
     e.preventDefault();
     setSubmitting(true);
 
-    console.log(post);
+    if (!promptId) return alert("Prompt ID not found");
 
     try {
-      const response = await fetch("/api/prompts/new", {
-        method: "POST",
+      const response = await fetch(`/api/prompts/${promptId}`, {
+        method: "PATCH",
         body: JSON.stringify({
           prompt: post.prompt,
-          userId: session?.user.id,
           tag: post.tag,
         }),
       });
@@ -59,11 +56,11 @@ const EditPrompt = () => {
 
   return (
     <Form
-      type="Create"
+      type="Edit"
       post={post}
       setPost={setPost}
       submitting={submitting}
-      handleSubmit={createPost}
+      handleSubmit={updatePost}
     />
   );
 };
