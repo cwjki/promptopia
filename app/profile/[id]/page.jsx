@@ -23,12 +23,11 @@ const UserProfile = ({ params }) => {
     if (params?.id) fetchPosts();
   }, [params.id]);
 
- 
-
   return (
     <Profile
       name={profileName}
-      desc={`Welcome to ${profileName}'s personalized profile page`}
+      desc={`Welcome to ${profileName}'s personalized profile page. Explore ${profileName}'s exceptional prompts
+      and be inspired by the power of their imagination.`}
       data={posts}
     />
   );
