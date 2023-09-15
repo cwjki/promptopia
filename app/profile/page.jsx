@@ -14,19 +14,18 @@ const MyProfile = () => {
     router.push(`/update-prompt?id=${post._id}`);
   };
   const handleDelete = async (post) => {
-    const hasConfirmed = confirm(
-      "Are you sure you want to delete this prompt?"
-    );
+    const hasConfirmed = confirm("Are you sure you want to delete this prompt?");
 
-    if (hasConfirmed) {
+    if(hasConfirmed) {
       try {
         await fetch(`api/prompts/${post._id.toString()}`, {
-          method: "DELETE",
+          method: 'DELETE'
         });
 
         // update the react view
         const filteredPosts = posts.filter((p) => p._id !== post._id);
         setPosts(filteredPosts);
+
       } catch (error) {
         console.log(error);
       }
@@ -45,6 +44,7 @@ const MyProfile = () => {
     }
   }, [session]);
 
+
   return (
     <Profile
       name="My"
@@ -53,6 +53,7 @@ const MyProfile = () => {
       handleEdit={handleEdit}
       handleDelete={handleDelete}
     />
+    
   );
 };
 

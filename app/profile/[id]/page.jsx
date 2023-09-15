@@ -1,33 +1,37 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 import Profile from "@components/Profile";
 
-const MyProfile = ({ params }) => {
-  const [profileName, setProfileName] = useState('');
+const UserProfile = ({ params }) => {
+  const [profileName, setProfileName] = useState();
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await fetch(`/api/users/${params.id}/posts`);
-      const data = await response.json();
-      setPosts(data);
+      const profileResponse = await fetch(`/api/users/${params.id}`);
+      const postsResponse = await fetch(`/api/users/${params.id}/posts`);
+
+      const profileData = await profileResponse.json();
+      const postsData = await postsResponse.json();
+
+      setProfileName(profileData.userName);
+      setPosts(postsData);
     };
-    fetchPosts();
-  });
+    if (params?.id) fetchPosts();
+  }, [params.id]);
+
+ 
 
   return (
     <Profile
-      name="My"
-      desc="Welcome to your personalized profile page"
+      name={profileName}
+      desc={`Welcome to ${profileName}'s personalized profile page`}
       data={posts}
-      handleEdit={() => {}}
-      handleDelete={() => {}}
     />
   );
 };
 
-export default MyProfile;
+export default UserProfile;
