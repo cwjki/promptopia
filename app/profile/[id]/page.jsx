@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import Profile from "@components/Profile";
 
 const MyProfile = ({ params }) => {
+  const [profileName, setProfileName] = useState('');
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -23,8 +24,8 @@ const MyProfile = ({ params }) => {
       name="My"
       desc="Welcome to your personalized profile page"
       data={posts}
-      handleEdit={handleEdit}
-      handleDelete={handleDelete}
+      handleEdit={() => {}}
+      handleDelete={() => {}}
     />
   );
 };
