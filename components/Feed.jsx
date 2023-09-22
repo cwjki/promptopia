@@ -18,7 +18,7 @@ const PromptCardList = ({ data, handleTagClick }) => {
 };
 
 const Feed = () => {
-  const [posts, setPosts] = useState([]);
+  const [allPosts, setAllPosts] = useState([]);
 
   // Search states
   const [searchText, setSearchText] = useState("");
@@ -32,7 +32,7 @@ const Feed = () => {
   const fetchPosts = async () => {
     const response = await fetch("/api/prompts");
     const data = await response.json();
-    setPosts(data);
+    setAllPosts(data);
   };
 
   const handleSearchChange = (e) => {
@@ -47,7 +47,10 @@ const Feed = () => {
     );
   };
 
-  const filterPrompts = () => {};
+  const filterPrompts = (searchText) => {
+    const regex = new RegExp(searchText, "i"); // 'i' flag for case-insensitive search
+    return allPosts.filter((item) => regex.test(item.creator.userName));
+  };
 
   return (
     <section className="feed">
@@ -62,7 +65,7 @@ const Feed = () => {
         />
       </form>
 
-      <PromptCardList data={posts} handleTagClick={() => {}} />
+      <PromptCardList data={allPosts} handleTagClick={() => {}} />
     </section>
   );
 };
