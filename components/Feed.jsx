@@ -52,6 +52,8 @@ const Feed = () => {
     return allPosts.filter((item) => regex.test(item.creator.userName));
   };
 
+  const handleTagClick = () => {};
+
   return (
     <section className="feed">
       <form className="relative w-full flex-center">
@@ -65,7 +67,15 @@ const Feed = () => {
         />
       </form>
 
-      <PromptCardList data={allPosts} handleTagClick={() => {}} />
+      {/* All or Filter Prompts  */}
+      {searchText ? (
+        <PromptCardList
+          data={searchedResults}
+          handleTagClick={handleTagClick}
+        />
+      ) : (
+        <PromptCardList data={allPosts} handleTagClick={handleTagClick} />
+      )}
     </section>
   );
 };
