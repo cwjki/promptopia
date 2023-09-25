@@ -4,8 +4,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const Nav = () => {
+  const router = useRouter();
   const { data: session } = useSession();
 
   const [providers, setProviders] = useState(null);
@@ -20,6 +22,13 @@ const Nav = () => {
 
     setUpProviders();
   }, []);
+
+  const handleSignOut = () => {
+    setToggleDropDown(false);
+    signOut({ redirect: false }).then(() => {
+      router.push("/");
+    });
+  };
 
   return (
     <nav className="flex-between w-full mb-16 pt-3">
@@ -41,7 +50,11 @@ const Nav = () => {
             <Link href="/create-prompt" className="black_btn">
               Create Post
             </Link>
-            <button type="button" onClick={signOut} className="outline_btn">
+            <button
+              type="button"
+              onClick={handleSignOut}
+              className="outline_btn"
+            >
               Sign Out
             </button>
             <Link href="/profile">
@@ -103,10 +116,7 @@ const Nav = () => {
                 <button
                   type="button"
                   className="mt-5 w-full black_btn"
-                  onClick={() => {
-                    setToggleDropDown(false);
-                    signOut;
-                  }}
+                  onClick={handleSignOut}
                 >
                   Sign Out
                 </button>
