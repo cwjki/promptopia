@@ -6,12 +6,20 @@ const UserSchema = new Schema({
     unique: [true, "Email already exists!"],
     required: [true, "Email is required!"],
   },
-  userName: {
+  givenName: {
     type: String,
-    required: [true, "Username is required!"],
+    required: [true, "Given name is required!"],
     match: [
-      /^(?=.{8,30}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/,
-      "Username invalid, it should contain 8-30 alphanumeric letters and be unique!",
+      /^(?=.{1,15}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/,
+      "Given name invalid, it should contain 1-15 alphanumeric letters!",
+    ],
+  },
+  familyName: {
+    type: String,
+    required: [true, "Family name is required!"],
+    match: [
+      /^(?=.{5,30}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/,
+      "Family name invalid, it should contain 5-30 alphanumeric letters!",
     ],
   },
   image: {
