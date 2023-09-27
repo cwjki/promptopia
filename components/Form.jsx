@@ -48,7 +48,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
                 tag: e.target.value,
               })
             }
-            placeholder="#tag"
+            placeholder="only one tag, no need to use #"
             required
           />
         </label>
