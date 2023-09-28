@@ -48,7 +48,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
                 tag: e.target.value,
               })
             }
-            placeholder="only one tag, no need to use #"
+            placeholder="Please enter the tag name (without the '#' symbol)"
             required
           />
         </label>
