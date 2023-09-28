@@ -30,7 +30,7 @@ const Feed = () => {
   }, []);
 
   const fetchPosts = async () => {
-    const response = await fetch("/api/prompts", {cache: 'no-store'});
+    const response = await fetch("/api/prompts", { next: { revalidate: 10 } });
     const data = await response.json();
     setAllPosts(data);
   };
